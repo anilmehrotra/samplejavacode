@@ -1,4 +1,4 @@
-package demo.api.spring.boot;
+
 
 public class Mutable extends Immutable {
 

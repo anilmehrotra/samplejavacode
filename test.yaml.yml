@@ -1,0 +1,111 @@
+# this is an example of the EMAIL API Documentation
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: EMail-History API
+  description: Email History API for Customer Information
+  version: "1.0.0"
+# the domain of the service
+host: api.email.history.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /read
+produces:
+  - application/json
+paths:
+  /consumers/history/email:
+    get:
+      summary: Customer Activity
+      description: |
+        The Customer Activity end point returns data about a customer lifetime activity
+        with customer profile. The response will include ACID, email history in list
+        and count of that list.The history list in the response don't have any maximum 
+        length based.
+        
+      parameters:
+        - name: profile identifier type
+          in: query
+          type: string
+          format: String
+          description: value of PROFILE_IDENTIFIER_TYPE would be only CSID or ACID.
+          required: true
+        - name: profile identifier
+          in: query
+          type: string
+          description: value of PROFILE_IDENTIFIER would be numeric.
+          required: true
+        - name: version
+          in: query
+          type: String
+          format: String
+          description: value of VERSION would be 1.0.
+          required: true
+        - name: source system
+          in: query
+          type: String
+          format: String
+          description: Value of SOURCE_SYSTEM is based on Channel, here value is L.
+          required: true
+        - name: sub source system
+          in: query
+          type: String
+          format: String
+          description: Value of SUB_SOURCE_SYSTEM is based on Channel, here value is UGI CIAM.
+          required: true
+        - name: operator id
+          in: query
+          type: String
+          format: String
+          description: Value of OPERATOR_ID will be alphanumeric with length 8.
+        - name: correlation id
+          in: query
+          type: String
+          format: String
+          description: Value of CORRELATION_ID will be string.
+      tags:
+        - email-history
+      responses:
+        200:
+          description: A Json Object containing ACID, resultCount and list of emailHistory
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/email-history'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  email-history:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+      description:
+        type: string
+        description: Description of product.
+      display_name:
+        type: string
+        description: Display name of product.
+      capacity:
+        type: string
+        description: Capacity of product. For example, 4 people.
+      image:
+        type: string
+        description: Image URL representing the product.
+  Error:
+    type: object
+    properties:
+      type:
+        type: string
+      code:
+        type: string
+      codedetails:
+        type: string
+      fields:
+        type: string
+      message:
+        type: string

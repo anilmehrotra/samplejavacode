@@ -1,4 +1,4 @@
-package demo.api.spring.boot;
+
 
 public interface Interface1 {
   strictfp default void show(){

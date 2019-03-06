@@ -1,4 +1,4 @@
-package demo.api.spring.boot;
+
 
 public interface Interface2 {
   default void show() {

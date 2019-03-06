@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>test</groupId>
+  <artifactId>testswg</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <build>
+  <plugins>
+  <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-war-plugin</artifactId>
+	<version>2.4</version>
+	
+	<configuration>
+		<webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+	</configuration> 
+</plugin>
+    <plugin>
+        <groupId>io.swagger</groupId>
+        <artifactId>swagger-codegen-maven-plugin</artifactId>
+        <version>2.1.5</version>
+        <executions>
+            <execution>
+            <id>test</id>
+                <goals>
+                    <goal>generate</goal>
+                </goals>
+                <configuration>
+                    <inputSpec>${project.basedir}/src/main/resources/test.yaml.yml</inputSpec>
+                    <language>html</language>
+                   <output>${project.basedir}/src/main/resources/test</output>
+                    
+                </configuration>
+            </execution>
+            <execution>
+            <id>test1</id>
+                <goals>
+                    <goal>generate</goal>
+                </goals>
+                <configuration>
+                    <inputSpec>${project.basedir}/src/main/resources/test1.yaml.yml</inputSpec>
+                    <language>html</language>
+                   <output>${project.basedir}/src/main/resources/test1</output>
+                    
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    </plugins>
+     <pluginManagement>
+        <plugins>
+            <!--This plugin's configuration is used to store Eclipse 
+                m2e settings only. It has no influence on the Maven build itself. -->
+            <plugin>
+                <groupId>org.eclipse.m2e</groupId>
+                <artifactId>lifecycle-mapping</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <lifecycleMappingMetadata>
+                        <pluginExecutions>
+                            <pluginExecution>
+                                <pluginExecutionFilter>
+                                    <groupId>io.swagger</groupId>
+        							<artifactId>swagger-codegen-maven-plugin</artifactId>
+                                    <versionRange>[2.1.5,)</versionRange>
+                                    <goals>
+                                        <goal>generate</goal>
+                                    </goals>
+                                </pluginExecutionFilter>
+                                <action>
+                                    <execute />
+                                </action>
+                            </pluginExecution>
+                        </pluginExecutions>
+                    </lifecycleMappingMetadata>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+</project>
